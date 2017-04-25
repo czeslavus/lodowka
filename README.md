@@ -1,1 +1,2 @@
-# lodowka
+# Lodowka
+Prosty sterownik urzadzenia chlodzacego
