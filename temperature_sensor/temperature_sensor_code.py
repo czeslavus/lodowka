@@ -1,6 +1,7 @@
 import os
 import glob
 import time
+import pymongo
 
 from datetime import datetime
  
@@ -30,10 +31,17 @@ def read_temp():
         return temp_c
 	
 while True:
-    f = open("temperatura.txt", 'a')
     t = read_temp()
     dt = datetime.now()
-    print >>f, "%s; %f" % (dt,t)
 #    print "%s; %f" % (dt,t)
-    f.close()
-    time.sleep(120)
+
+    client = MongoClient()
+    db = client.lodowka
+    coll = db.pomiary    
+    post = {"ts" : dt,"t1" : t}
+    tid = coll.insert_one(post).inserted_id
+    print "last "+inserted_id
+#    f = open("temperatura.txt", 'a')
+#    print >>f, "%s; %f" % (dt,t)
+#    f.close()
+    time.sleep(60)
