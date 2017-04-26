@@ -3,7 +3,10 @@ import glob
 import time
 import pymongo
 
+from pymongo import MongoClient
 from datetime import datetime
+
+samplingTime = 60
  
 os.system('modprobe w1-gpio')
 os.system('modprobe w1-therm')
@@ -39,9 +42,11 @@ while True:
     db = client.lodowka
     coll = db.pomiary    
     post = {"ts" : dt,"t1" : t}
-    tid = coll.insert_one(post).inserted_id
-    print "last "+inserted_id
+    result = db.pomiary.insert_one(post)
+    result
+    print "last "+str(result.inserted_id)
+    
 #    f = open("temperatura.txt", 'a')
 #    print >>f, "%s; %f" % (dt,t)
 #    f.close()
-    time.sleep(60)
+    time.sleep(samplingTime)
