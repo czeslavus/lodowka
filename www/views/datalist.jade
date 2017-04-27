@@ -1,0 +1,10 @@
+extends layout
+
+block content
+    h1.
+        #{title} : Dane z bazy danych
+    ul
+        each record, i in datalist
+            li
+               p #{record.ts} : #{record.t1}
+
